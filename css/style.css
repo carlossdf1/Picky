@@ -80,10 +80,12 @@ img{
     flex-wrap: wrap;
     justify-content: center;
     /* margin: 3rem; */
+    padding-bottom: 2rem;
 }
-
-.col-1{
-    width: 70%;
+@media screen and (min-width: 998px) {
+    .col-1{
+        width: 70%;
+    }
 }
 
 .col-2{

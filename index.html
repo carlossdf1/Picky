@@ -23,7 +23,7 @@
             <form action="https://www.google.cl/search" target="_self">
                 <input type="search" class="search" name="q" id="q" placeholder="Que buscas?">
             </form>
-            <div class="nav">
+            <div class="nav" id="listaFav">
                 <button type="button" onclick="search('https://www.youtube.com/results?search_query=')"
                     style="background-color: #c4302b; color: white;">Youtube
                     <img src="img/youtube.svg" alt="youtube">
@@ -65,7 +65,7 @@
                     TuManga Online
                     <img src="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text x=%22.0em%22 y=%221.0em%22 font-size=%2280%22>💭</text></svg>" alt="tumangaonline">
                 </button>
-                <button type="button" onclick=""
+                <button type="button" onclick="addFavoritoForm()"
                 style="background-color: black; opacity: .65;; color: white; font-size: 70px;">
                     <h2 style="margin: 0px;">+</h2>
                 </button>
@@ -79,15 +79,45 @@
         </div>
     </main>
 
-    <template>
+    <template id="botonNormal">
+        <button type="button">
+            <img src="" alt="">
+        </button>
     </template>
 
+    <template id="botonEmote">
+        <button type="button">
+        <img src="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22>
+            <text x=%22.0em%22 y=%221.0em%22 font-size=%2280%22>
+            </text></svg>" alt="google news">
+    </button>
+
+    </template>
+
+    <div id="modalFav" class="modal d-none">
+        <div class="modal-content" onmouseout="closeFav()">
+            <form action="" target="_self" >
+                <label for="NombreFav">Nombre: </label>
+                <input type="text" name="NombreFav" id="NombreFav" placeholder="Nombre" required>
+                <label for="UrlFav">URL: </label>
+                <input type="url" name="UrlFav" id="UrlFav" placeholder="URL" required>
+                <label for="ColorFav">Color: </label>
+                <input type="color" name="ColorFav" id="ColorFav" value="#66d9ef" required>
+                <label for="ImgFav">Imagen o Emote: </label>
+                <input type="text" name="ImgFav" id="ImgFav" placeholder="url, o emote">
+                <label for="CategoriaFav">Categoría: </label>
+                <input list="Categorias" name="CategoriaFav" id="CategoriaFav" required>
+                <datalist id="Categorias">
+                    <option value="Youtube">
+                    <option value="Google News">
+                    <option value="Youtube Music">
+                </datalist>
+                <button type="button" onclick="addFav()">Agregar</button>
+        </div>
+    </div>
 
     <footer>
-
     </footer>
-
-
 
     <script src="js/index.js"></script>
 </body>

@@ -1,5 +1,3 @@
-localStorage.getItem('favoritos', JSON.stringify([]));
-
 function search(url){
     let s = document.getElementById('q').value;
     window.location.assign(url+s);
@@ -7,7 +5,7 @@ function search(url){
 
 function addFavoritoForm(){
     document.getElementById("modalFav").classList.remove("d-none");
-    // let fav = JSON.parse(localStorage.getItem('favoritos'));
+    let fav = JSON.parse(localStorage.getItem('favoritos'));
     // fav.push(url);
     // localStorage.setItem('favoritos', JSON.stringify(fav));
 }
@@ -24,54 +22,54 @@ function hiddenModal(e){
 
 function addFav(){
 
-    let fav = JSON.stringify({
+    const fav = {
         "name": document.getElementById("NombreFav").value,
         "url": document.getElementById("UrlFav").value,
         "color": document.getElementById("ColorFav").value,
         "image": document.getElementById("ImgFav").value,
         "category": document.getElementById("CategoriaFav").value
-    });
+    };
 
-    let favoritos = localStorage.getItem('favoritos');
+    let favoritos =  JSON.parse( localStorage.getItem('favoritos') );
+    
+    if (!favoritos) { 
+        localStorage.setItem('favoritos', JSON.stringify([fav]));
+    } else {
+        favoritos.push(fav);
+        localStorage.setItem('favoritos', JSON.stringify(favoritos));
+    }
 
-    console.log(fav);
-    favoritos+=[fav];
-    console.log(favoritos);
-
-    localStorage.setItem('favoritos', JSON.stringify(favoritos));
-    console.log(localStorage.getItem('favoritos'));
-
+    console.log(localStorage.getItem('favoritos')); 
     document.getElementById("modalFav").classList.add("d-none");
 }
 
-// function listaFavoritos(){
+function listaFavoritos(){
 
-//     let favoritos = JSON.parse(localStorage.getItem('favoritos'));
+    const favoritos = JSON.parse(localStorage.getItem('favoritos'));
 
-//     for (let i in favoritos) {
+    for (let i in favoritos) {
 
-//         let temp = document.importNode(
-//             document.getElementById("botonNormal").content,
-//             true
-//         );
+        let temp = document.importNode(
+            document.getElementById("botonNormal").content,
+            true
+        );
 
-//         let { name, url, color, image } = favoritos[i];
+        let { name, url, color, image } = favoritos[i];
 
+        temp.innerHTML = `${[name]}`;
+        temp.style.backgroundColor = `${color}`;
+        temp.style.backgroundImage = `url(${image})`;
+        temp.href = `${url}`;
 
-//         temp.innerHTML = `${[name]}`;
-//         temp.style.backgroundColor = `${color}`;
-//         temp.style.backgroundImage = `url(${image})`;
-//         temp.href = `${url}`;
+        // temp.onclick = `search(${[url]})`;
 
-//         // temp.onclick = `search(${[url]})`;
+        console.log(temp);
 
-//         console.log(temp);
+        document.getElementById("listaFav").appendChild(temp);
 
-//         document.getElementById("listaFav").appendChild(temp);
+    }
 
-//     }
-
-// }
+}
 
 let fav=[
     {

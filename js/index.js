@@ -39,7 +39,7 @@ function addFav(){
         localStorage.setItem('favoritos', JSON.stringify(favoritos));
     }
 
-    console.log(localStorage.getItem('favoritos')); 
+    console.log(favoritos); 
     document.getElementById("modalFav").classList.add("d-none");
 }
 

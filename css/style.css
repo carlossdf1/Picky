@@ -59,6 +59,7 @@ main{
     margin: 10px;
     cursor: pointer;
     box-shadow: 0px 0px 10px #000000;
+    color: white;
 }
 
 iframe{
@@ -94,6 +95,24 @@ img{
     flex-direction: column;
 }
 
+
+
+.edit-btn{
+    width: 20%;
+    height: 20%;
+    border: 1px solid #fff;
+    border-radius: 8px;
+    opacity: .25;
+    display: block;
+    margin: auto;
+    background-color: rgb(0, 0, 0) ;
+    color: white;
+    margin-bottom: 0%;
+    margin-top: 0%;
+    margin-left: 80%;
+    margin-right: 0%;
+}
+
 .modal{
     display: flex;
     justify-content: center;
@@ -111,7 +130,7 @@ img{
 
 .modal-content{
     width: 30%;
-    height: 50%;
+    height: 70%;
     background: #282828;
     border-radius: 8px;
     color: #fff;
@@ -146,6 +165,19 @@ img{
     padding-left: 8px;
     font-size: 1.2rem;
     margin-bottom: .5rem;
+}
+
+.modal-content .radio{
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-around; */
+    align-items: center;
+    width: auto;
+    height: 40px;
+    border-radius: 8px;
+    /* padding-left: 8px; */
+    font-size: 1.2rem;
+    /* margin-bottom: .5rem; */
 }
 
 .modal-content button{

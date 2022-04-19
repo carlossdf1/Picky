@@ -41,7 +41,7 @@ let favDefault = [
         "name": "Twitch",
         "url": "https://www.twitch.tv",
         "search": "https://www.twitch.tv/search?term=",
-        "color": "#6441a5",
+        "color": "#772ce8",
         "fontColor": "#ffffff",
         "img": "img/twitch.svg",
         "category": "Streaming"
@@ -89,6 +89,15 @@ let favDefault = [
         "color": "#fff700",
         "fontColor": "black",
         "img": "📚",
+        "category": "Lectura"
+    },
+    {
+        "name": "RawDevArt",
+        "url": "https://rawdevart.com",
+        "search": "https://rawdevart.com/search/?title=",
+        "color": "#856666",
+        "fontColor": "black",
+        "img": "🈚",
         "category": "Lectura"
     },
     {

@@ -1,105 +1,111 @@
-let fav = JSON.parse(localStorage.getItem("favoritos"));
+// <----------------- administra almacenamiento de datos ------------------>
 
-// function clickFav() {
-//     document
-//         .getElementById("btny")
-//         .addEventListener("click", searchFav, false);
-// }
-
-// function searchFav(e) {
-//     if (e.target.id == "btny") {
-//         search('https://www.youtube.com', 'https://www.youtube.com/results?search_query=');
-//     }
-// }
-
-// function editFav(){
-//     document
-//     .getElementById("btny")
-//     .addEventListener("click", modalEdit, false);
-//     // alert("Editar favorito");
-// }
-
-// function modalEdit(e) {
-//     if (e.target.id == "btny") {
-//     alert("Editar favorito");
-//     }
-// }
-
-function search(url,search) {
-    let s = getId("q").value;
-    console.log(url);
-    console.log(search);
-    console.log(s);
-    console.log(s.length);
-    if (s.length > 0) {
-        window.location.assign(search + s);
-    }
-    else {
-        window.location.assign(url);
-    }
+if (!getStore("favoritos")) {
+    setStore("favoritos", favDefault);
 }
 
-// <-------------- Funciones formulario y favoritos ------------------>
-
-function addFav(form) {
-    let fav = getFormData(form);
-
-    let favoritos = JSON.parse(localStorage.getItem("favoritos"));
-
-    if (!favoritos) {
-        localStorage.setItem("favoritos", JSON.stringify([fav]));
-    } else {
-        favoritos.push(fav);
-        localStorage.setItem("favoritos", JSON.stringify(favoritos));
-    }
-
-    console.log(favoritos);
-    hiddenModal();
-    printFav();
-}
+// <----------------- generar visualizacion de favoritos ------------------>
 
 function printFav(fav) {
-
-    // document.getElementById("listaFav").innerHTML = "";
+    document.getElementById("listaFav").innerHTML = "";
     if (fav) {
         for (const i in fav) {
             let { name, url, search, color, fontColor, img } = fav[i];
             let emoji = img.match(/(\p{EPres}|\p{ExtPict})/gu);
 
-            if (emoji!=null) {
+            if (emoji != null) {
                 img = `data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text x=%22.0em%22 y=%221.0em%22 font-size=%2280%22>${img}</text></svg>`;
             }
-            let button = `<button onclick="search('${url}','${search}')" style="background-color: ${color}; color: ${fontColor}" >${name}<img src="${img}" alt="${name}"></button>`;
+            let button = `<div><button id="${i}" class="btn-fav" onmouseover="clickFav(${i})" style="background-color: ${color}; color: ${fontColor}" >${name}<img src="${img}" class="icon" id="${i}" onmouseover="clickFav(${i})" alt="${name}"></button><div class="edit-btn" onclick="clickEditFav(${i})">⚙</div></div>`;
             getId("listaFav").innerHTML += button;
         }
+        getId("listaFav").innerHTML += impTemp("temp-btnAddFavForm", "btnAddForm").outerHTML;
     }
 }
 
-// <------------------ Funciones auxiliares ------------------>
-function getFormData(form) {
-    // console.log(form);
-    let datoStr = "";
+// <-------------- Funciones crear, editar, borrar ------------------>
 
-    for (let i in form.id) {
-    // for (let i = 0; i < form.length; i++) {
-        // console.log(form[i]);
-        let { name, value } = form[i];
-        datoStr += `"${name}":"${value}",`;
-    }
+function addFav(form) {
+    let fav = getFormData(form);
+    console.log(fav);
+    if (validatedFav(fav)) {
+        let favoritos = getStore("favoritos");
 
-    let datos = JSON.parse("{" + datoStr.slice(0, -1) + "}");
-    // console.log(datos);
-    return datos;
-}
-
-function clearFormData(form) {
-    for (let i = 0; i < form.length; i++) {
-        form[i].value = form[i].value = "";
+        if (!favoritos) {
+            setStore("favoritos", [fav]);
+        } else {
+            favoritos.push(fav);
+            setStore("favoritos", favoritos);
+        }
+        console.log(favoritos);
+        hiddenModal();
+        printFav(favoritos);
     }
 }
 
-function getId(id) {
-    return document.getElementById(id);
+function saveFav(id) {
+    let favoritos = getStore("favoritos");
+    let fav = getFormData(formFav);
+    let position = getId("position").value;
+    if (validatedFav(fav)) {
+        if (!favoritos) {
+            setStore("favoritos", [fav]);
+        } else {
+            if (position == id) {
+                favoritos[id] = fav;
+                setStore("favoritos", favoritos);
+            }
+            else {
+                favoritos.splice(id, 1);
+                favoritos.splice(position, 0, fav);
+                setStore("favoritos", favoritos);
+            }
+        }
+        console.log(favoritos);
+        hiddenModal();
+        printFav(favoritos);
+    }
+    else {
+        alert("No se pudo guardar el favorito");
+    }
+}
+
+function delFav(id) {
+    let favoritos = getStore("favoritos");
+    favoritos.splice(id, 1);
+    setStore("favoritos", favoritos);
+    hiddenModal();
+    printFav(favoritos);
+}
+
+function validatedFav(fav) {
+    let { name, url, search, color, fontColor, img } = fav;
+
+    if (name.length < 1) {
+        alert("Ingrese un nombre");
+        return false;
+    }
+    if (url.length < 1) {
+        alert("Ingrese una url");
+        return false;
+    }
+    if (search.length < 1) {
+        alert("Ingrese una busqueda");
+        return false;
+    }
+    if (color.length < 7) {
+        alert("Ingrese un color");
+        return false;
+    }
+    if (fontColor.length < 1) {
+        alert("Ingrese un color de fuente");
+        return false;
+    }
+    if (img < 1) {
+        alert("Ingrese un emoji");
+        return false;
+    }
+    return true;
 }
 
 // <------------------ Funciones modal ----------------------->
@@ -120,138 +126,59 @@ function hiddenModal() {
     getId("modalFav").classList.add("d-none");
 }
 
-function addFavoritoForm(form) {
-    getId("modalFav").classList.remove("d-none");
-    clearFormData(form);
+// <----------------- accecede al favorito ------------------>
+function search(url, search) {
+    let s = getId("q").value;
+    if (s.length > 0) {
+        window.location.assign(search + s);
+    }
+    else {
+        window.location.assign(url);
+    }
 }
 
 //<------------------ Eventos ----------------------->
 
-document.addEventListener("DOMContentLoaded", function(event) {
-    printFav(fav);
-    printFav(favDefault);
+document.addEventListener("DOMContentLoaded", function (event) {
+    printFav(getStore("favoritos"));
 });
 
-// <------------------ Datos default ------------------>
+function clickFav(id) {
+    document
+        .getElementById(id)
+        .addEventListener("click", clickOnFav, false);
+}
 
-let favDefault = [
-    {
-        "name": "Youtube",
-        "url": "https://www.youtube.com",
-        "search": "https://www.youtube.com/results?search_query=",
-        "color": "#c4302b",
-        "fontColor": "#ffffff",
-        "img": "img/youtube.svg",
-        "category": "Streming"
-    },
-    {
-        "name": "Google News",
-        "url": "https://news.google.com",
-        "search": "https://news.google.com/search?q=",
-        "color": "#5DA6F8",
-        "fontColor": "black",
-        "img": "📰",
-        "category": "Noticias"
-    },
-    {
-        "name": "Youtube Music",
-        "url": "https://music.youtube.com",
-        "search": "https://music.youtube.com/search?q=",
-        "color": "#b2071d",
-        "fontColor": "#ffffff",
-        "img": "img/headphones.svg",
-        "category": "Streaming"
-    },
-    {
-        "name": "Twitter",
-        "url": "https://twitter.com",
-        "search": "https://twitter.com/search?q=",
-        "color": "#00acee",
-        "fontColor": "black",
-        "img": "img/twitter.svg",
-        "category": "Redes Sociales"
-    },
-    {
-        "name": "Twitch",
-        "url": "https://www.twitch.tv",
-        "search": "https://www.twitch.tv/search?term=",
-        "color": "#6441a5",
-        "fontColor": "#ffffff",
-        "img": "img/twitch.svg",
-        "category": "Streaming"
-    },
-    {
-        "name": "SoloTodo",
-        "url": "https://www.solotodo.cl",
-        "search": "https://www.solotodo.cl/search?search=",
-        "color": "#D27336",
-        "fontColor": "#ffffff",
-        "img": "💻",
-        "category": "Tiendas"
-    },
-    {
-        "name": "AliExpress",
-        "url": "https://es.aliexpress.com",
-        "search": "https://es.aliexpress.com/wholesale?&SearchText=",
-        "color": "#ff4747",
-        "fontColor": "#ffffff",
-        "img": "img/basket2-fill.svg",
-        "category": "Tiendas"
-    },
-    {
-        "name": "Animeflv",
-        "url": "https://www3.animeflv.net",
-        "search": "https://www3.animeflv.net/browse?q=",
-        "color": "#2c2b2a",
-        "fontColor": "#ffffff",
-        "img": "🗾",
-        "category": "Streaming"
-    },
-    {
-        "name": "TuManga Online",
-        "url": "https://lectortmo.com",
-        "search": "https://lectortmo.com/library?_pg=1&title=",
-        "color": "#22489B",
-        "fontColor": "#ffffff",
-        "img": "💭",
-        "category": "Lectura"
-    },
-    {
-        "name": "Ninemanga",
-        "url": "https://es.ninemanga.com/",
-        "search": "https://es.ninemanga.com/search/?wd=",
-        "color": "#fff700",
-        "fontColor": "black",
-        "img": "📚",
-        "category": "Lectura"
-    },
-    {
-        "name": "Knasta",
-        "url": "https://knasta.cl/",
-        "search": "https://knasta.cl/results?q=",
-        "color": "#00ffaa",
-        "fontColor": "black",
-        "img": "🛍",
-        "category": "Tiendas"
+function clickOnFav(e) {
+    if (e.target.classList == "icon" || e.target.classList == "btn-fav") {
+        let fav = getStore("favoritos")[e.target.id];
+        // const f = fav[Number(e.target.id)];
+        search(fav.url, fav.search);
     }
-];
+}
 
-let favObject =[
-    {
-        "name": "",
-        "url": "",
-        "search": "",
-        "color": "",
-        "fontColor": "",
-        "img": "",
-        "category": ""
-    },    {
-        "name": "",
-        "url": "",
-        "search": "",
-        "color": "",
-        "fontColor": "",
-        "img": "",
-        "category": ""
-    }
-];
+function clickAddFav(form) {
+    getId("modalFav").classList.remove("d-none");
+    getId("btnsEdit").classList.add("d-none");
+    getId("btnAdd").classList.remove("d-none");
+    clearFormData(form);
+}
+
+function clickEditFav(id) {
+    let favoritos = getStore("favoritos");
+    let f = favoritos[id];
+    console.log(f);
+    getId("modalFav").classList.remove("d-none");
+    getId("btnsEdit").classList.remove("d-none");
+    getId("btnAdd").classList.add("d-none");
+
+    setFormData(formFav, f);
+
+    let p = getId("position");
+    p.value = id;
+    p.setAttribute("max", favoritos.length - 1);
+
+    getId("btnSave").setAttribute("onclick", `saveFav(${id})`);
+    getId("btnDel").setAttribute("onclick", `delFav(${id})`);
+
+}

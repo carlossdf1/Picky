@@ -9,6 +9,9 @@
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔎</text></svg>">
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/data.js"></script>
+    <!-- <script src="js/script.js"></script> -->
+    <script src="js/helpers.js"></script>
 </head>
 
 <body>
@@ -20,31 +23,13 @@
     <main>
         <div class="col-1">
             <h1>Picky🔎</h1>
-
             <form action="https://www.google.cl/search" target="_self">
                 <input type="search" class="search" name="q" id="q" placeholder="Que buscas?">
             </form>
             <div>
                 <div class="nav" id="listaFav">
-                    <button type="button" onclick="addFavoritoForm(formFav)"
-                        style="background-color: black; opacity: .65; color: white; font-size: 70px;">
-                        <h2 style="margin: 0px;">+</h2>
-                    </button>
-                    <!-- <button type="button" id="btny" onclick="search('http://www.google.com/','http://www.google.com/search?q=')"
-                        style="background-color: #c4302b; color: white;">Youtube
-                        <img src="img/youtube.svg" alt="youtube">
-                        <div class="edit-btn" onmouseover="editFav()">⚙</div>
-                    </button> -->
                 </div>
-                <template>
-                    <button type="button" onclick="addFavoritoForm(formFav)"
-                        style="background-color: black; opacity: .65; color: white; font-size: 70px;">
-                        <h2 style="margin: 0px;">+</h2>
-                    </button>
-                </template>
             </div>
-
-
         </div>
 
         <div class="col-2">
@@ -56,24 +41,24 @@
     <div id="modalFav" class="modal d-none">
         <div class="modal-content" onmouseout="closeFav()">
             <form id="formFav" action="#" target="_self">
-                <label for="name">Nombre: </label>
-                <input type="text" name="name" id="name" placeholder="Ingrese un nombre" required>
-                <label for="url">URL: </label>
-                <input type="url" name="url" id="url" placeholder="www.example.com" required>
-                <label for="search">URL Busqueda: </label>
-                <input type="url" name="search" id="search" placeholder="www.example.com/search?q=" required>
-                <label for="color">Color: </label>
-                <input type="color" name="color" id="color" value="#66d9ef" required>
-                <label>Color del texto: </label>
-                <input list="fontColors" name="fontColor" id="fontColor" placeholder="Escoge un color para el texto">
+                <label for="nameFav">Nombre: </label>
+                <input type="text" class="inp" name="nameFav" id="name" placeholder="Ingrese un nombre" required>
+                <label for="urlFav">URL: </label>
+                <input type="url" class="inp" name="urlFav" id="url" placeholder="www.example.com" required>
+                <label for="searchFav">URL Busqueda: </label>
+                <input type="url" class="inp" name="searchFav" id="search" placeholder="www.example.com/search?q=" required>
+                <label for="colorFav">Color: </label>
+                <input type="color" class="inp" name="colorFav" id="color" required>
+                <label for="fontColorFav">Color del texto: </label>
+                <input list="fontColors" class="inp" name="fontColor" id="fontColor" placeholder="Escoge un color para el texto">
                 <datalist id="fontColors">
                     <option value="white">Blanco</option>
                     <option value="black">Negro</option>
                 </datalist>
-                <label for="img">Imagen o Emote: </label>
-                <input type="text" name="img" id="img" placeholder="Ingrese una url o un emote">
-                <label for="category">Categoría: </label>
-                <input list="categorias" name="category" id="category" placeholder="Ingrese una Categoria" required>
+                <label for="imgFav">Imagen o Emote: </label>
+                <input type="text" class="inp" name="imgFav" id="img" placeholder="Ingrese una url o un emote">
+                <label for="categoryFav">Categoría: </label>
+                <input list="categorias" class="inp" name="categoryFav" id="category" placeholder="Ingrese una Categoria" required>
                 <datalist id="categorias">
                     <option value="Buscadores">
                     <option value="Tiendas">
@@ -81,14 +66,38 @@
                     <option value="Musica">
                     <option value="Lectura">
                 </datalist>
-                <button type="button" onclick="addFav(formFav)">Agregar</button>
+                <label for="positionFav">Posición: </label>
+                <input type="number" class="inp" name="positionFav" id="position" placeholder="Ingrese una posición" min="0" value="">
+                <div class="buttons">
+                    <input type="submit" id="btnAdd" class="btn btn-add" value="Agregar➕" onclick="addFav(formFav)">
+                    <div id="btnsEdit" class="buttons">
+                        <button type="button" id="btnSave" class="btn btn-saber">Guardar💾</button>
+                        <button type="button" id="btnDel" class="btn btn-delete">Eliminar🗑</button>
+                    </div>
+                </div>
             </form>
-
         </div>
     </div>
 
     <footer>
     </footer>
+
+    <template id="temp-btnAddFavForm">
+        <button type="button" id="btnAddForm" onclick="clickAddFav(formFav)"
+            style="background-color: black; opacity: .65; color: white; font-size: 70px;">
+            <h2 style="margin: 0px;">+</h2>
+        </button>
+    </template>
+
+    <template id="temp-btnFav">
+        <div>
+            <button type="button" id="1" class="btn-fav" onmouseover="clickFav(1)"
+                style="background-color: #c4302b; color: white;">Prueba
+                <img src="img/youtube.svg" class="icon" id="1" onmouseover="clickFav(1)" alt="youtube">
+            </button>
+            <div class="edit-btn" onclick="editFav(1)">⚙</div>
+        </div>
+    </template>
 
     <script src="js/index.js"></script>
 </body>

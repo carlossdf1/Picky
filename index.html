@@ -20,6 +20,14 @@
         <!-- <video id="video" loop autoplay preload muted src="img/atardecerBlur.mp4"></video> -->
     </div>
 
+    <nav class="nav-menu-icon">
+        <button onclick="toggleMenu()">
+            <div class="icon-menu"></div>
+            <div class="icon-menu"></div>
+            <div class="icon-menu"></div>
+        </button>
+    </nav>
+
     <main>
         <div class="col-1">
             <h1>Picky🔎</h1>
@@ -33,8 +41,11 @@
         </div>
 
         <div class="col-2">
-            <iframe src="https://archivos.meteochile.gob.cl/portaldmc/movil/movilpronoregion.php?reg=10a"
-                frameborder="0" scrolling="no"></iframe>
+            <div class="widget">
+                <div class="edit-widget" onclick="editWidget()">⚙</div>
+                <iframe src="https://archivos.meteochile.gob.cl/portaldmc/movil/movilpronoregion.php?reg=10a"
+                    frameborder="0" scrolling="yes"></iframe>
+            </div>
         </div>
     </main>
 
@@ -46,11 +57,13 @@
                 <label for="urlFav">URL: </label>
                 <input type="url" class="inp" name="urlFav" id="url" placeholder="www.example.com" required>
                 <label for="searchFav">URL Busqueda: </label>
-                <input type="url" class="inp" name="searchFav" id="search" placeholder="www.example.com/search?q=" required>
+                <input type="url" class="inp" name="searchFav" id="search" placeholder="www.example.com/search?q="
+                    required>
                 <label for="colorFav">Color: </label>
                 <input type="color" class="inp" name="colorFav" id="color" required>
                 <label for="fontColorFav">Color del texto: </label>
-                <input list="fontColors" class="inp" name="fontColor" id="fontColor" placeholder="Escoge un color para el texto">
+                <input list="fontColors" class="inp" name="fontColor" id="fontColor"
+                    placeholder="Escoge un color para el texto">
                 <datalist id="fontColors">
                     <option value="white">Blanco</option>
                     <option value="black">Negro</option>
@@ -58,7 +71,8 @@
                 <label for="imgFav">Imagen o Emote: </label>
                 <input type="text" class="inp" name="imgFav" id="img" placeholder="Ingrese una url o un emote">
                 <label for="categoryFav">Categoría: </label>
-                <input list="categorias" class="inp" name="categoryFav" id="category" placeholder="Ingrese una Categoria" required>
+                <input list="categorias" class="inp" name="categoryFav" id="category"
+                    placeholder="Ingrese una Categoria" required>
                 <datalist id="categorias">
                     <option value="Buscadores">
                     <option value="Tiendas">
@@ -67,7 +81,8 @@
                     <option value="Lectura">
                 </datalist>
                 <label for="positionFav">Posición: </label>
-                <input type="number" class="inp" name="positionFav" id="position" placeholder="Ingrese una posición" min="0" value="">
+                <input type="number" class="inp" name="positionFav" id="position" placeholder="Ingrese una posición"
+                    min="0" value="">
                 <div class="buttons">
                     <input type="submit" id="btnAdd" class="btn btn-add" value="Agregar➕" onclick="addFav(formFav)">
                     <div id="btnsEdit" class="buttons">
@@ -78,6 +93,58 @@
             </form>
         </div>
     </div>
+
+    <nav id="config" class="config d-none">
+        <h5>Configuracion</h5>
+        <form id="formConf" action="#" target="_self">
+            <p>Fondo: </p>
+            <div>
+                <input type="range" id="fondo" name="fondo" class="switch" min="0" max="1" value="1" step="1">
+                <label for="fondo">Imagen</label>
+                <!-- <input type="range" id="fondo" name="fondo" class="switch" min="0" max="1" value="1" step="1">
+                <label for="cowbell">Imagen</label> -->
+            </div>
+            <div>
+                <label for="urlFav">URL: </label>
+                <input type="url" class="inp" name="urlFav" id="url" placeholder="www.example.com" required>
+            </div>
+            <div>
+                <label for="colorFav">Color de fondo: </label><br>
+                <input type="color" class="inp" name="colorFav" id="color" required><br>
+            </div>
+            <!-- <div class="p-1"></div> -->
+            <h6>Favoritos: </h6>
+            <div>
+                <label for="onlyIcons">Solo iconos: </label>
+                <input type="range" id="onlyIcons" name="onlyIcons" class="switch" min="0" max="1" value="1"
+                    step="1"><br><br>
+            </div>
+            <div>
+                <p for="onlyFav">Forma de iconos: </p>
+                <label for="onlyIcons">Redondos</label>
+                <input type="range" id="onlyIcons" name="onlyIcons" class="switch" min="0" max="1" value="1" step="1">
+                <label for="onlyIcons">Cuadrados</label>
+            </div>
+            <div>
+                <label for="fontColorFav">Color del texto: </label>
+                <input list="fontColors" class="inp" name="fontColor" id="fontColor"
+                    placeholder="Escoge un color para el texto">
+                <datalist id="fontColors">
+                    <option value="white">Blanco</option>
+                    <option value="black">Negro</option>
+                </datalist>
+            </div>
+            <div>
+                <label for="positionFav">Posición: </label>
+                <input type="number" class="inp" name="positionFav" id="position" placeholder="Ingrese una posición"
+                    min="0" value="">
+            </div>
+            <div class="buttons">
+                <button type="button" id="btnSave" class="btn btn-saber">Guardar💾</button>
+                <button type="button" id="btnDel" class="btn btn-delete">Cancelar❌</button>
+            </div>
+        </form>
+    </nav>
 
     <footer>
     </footer>

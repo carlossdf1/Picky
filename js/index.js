@@ -182,3 +182,7 @@ function clickEditFav(id) {
     getId("btnDel").setAttribute("onclick", `delFav(${id})`);
 
 }
+
+function toggleMenu() {
+    getId("config").classList.toggle("d-none");
+}

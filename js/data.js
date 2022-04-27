@@ -120,13 +120,5 @@ let favObject = [
         "fontColor": "",
         "img": "",
         "category": ""
-    }, {
-        "name": "",
-        "url": "",
-        "search": "",
-        "color": "",
-        "fontColor": "",
-        "img": "",
-        "category": ""
     }
 ];

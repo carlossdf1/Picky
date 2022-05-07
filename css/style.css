@@ -69,7 +69,7 @@ main{
     font-size: 1.3rem;
     font-weight: 500;
     margin: 10px;
-    margin-bottom: 25px;
+    /* margin-bottom: 35px; */
     cursor: pointer;
     box-shadow: 0px 0px 10px #000000;
     color: white;
@@ -90,6 +90,7 @@ main{
     flex-wrap: nowrap;
     align-content: flex-start;
     padding-left: 20px;
+    overflow: auto;
     /* padding-right: 0px; */
 }
 
@@ -99,7 +100,6 @@ main{
     padding: 0;
     margin-bottom: 1rem;
 }
-
 
 .config label{
     font-size: 1.2rem;
@@ -116,8 +116,6 @@ main{
     font-size: 1.2rem;
     margin-bottom: .5rem;
 }
-
-
 
 .config__link {
     /* display: block; */
@@ -163,8 +161,9 @@ button img{
 .edit-btn{
     box-sizing: content-box;
     width: 25px;
-    margin-top: -40%;
+    margin-top: -30%;
     margin-left: 76%;
+    /* padding-top: 0%; */
     color: white;
     font-size: 1.8rem;
     /* font-weight: 0.01rem; */
@@ -182,12 +181,15 @@ button img{
 
 .edit-widget{
     position: fixed;
+    box-sizing: content-box;
     color: white;
     font-size: 2rem;
     /* font-weight: 0.01rem; */
     opacity: 0.25;
     cursor: pointer;
     z-index: 3;
+    margin-right: 17%;
+    margin-top: -.5%;
 }
 
 .edit-widget:hover{
@@ -254,10 +256,9 @@ iframe{
     color: #fff;
     position: relative;
     z-index: 2;
-    overflow: hidden;
+    overflow: auto;
     padding: 1rem;
 }
-
 
 .modal-content form{
     display: flex;
@@ -296,6 +297,15 @@ iframe{
     /* padding-left: 8px; */
     font-size: 1.2rem;
     /* margin-bottom: .5rem; */
+}
+
+.close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px;
+    font-size: 2rem;
+    cursor: pointer;
 }
 
 /* .modal-content  */
@@ -368,9 +378,6 @@ iframe{
 .d-none{
     display: none;
 }
-
-
-
 
 .icon-menu {
     width: 25px;

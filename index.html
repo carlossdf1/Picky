@@ -51,6 +51,8 @@
 
     <div id="modalFav" class="modal d-none">
         <div class="modal-content" onmouseout="closeFav()">
+            <h5 class="m-none">Editar</h5>
+            <button class="close" onclick="hiddenModal()">&times;</button>
             <form id="formFav" action="#" target="_self">
                 <label for="nameFav">Nombre: </label>
                 <input type="text" class="inp" name="nameFav" id="name" placeholder="Ingrese un nombre" required>
@@ -89,6 +91,7 @@
                         <button type="button" id="btnSave" class="btn btn-saber">Guardar💾</button>
                         <button type="button" id="btnDel" class="btn btn-delete">Eliminar🗑</button>
                     </div>
+                    <button type="button" id="btnClose" class="btn btn-close" onclick="hiddenModal()">Cerrar✖</button>
                 </div>
             </form>
         </div>
@@ -96,6 +99,7 @@
 
     <nav id="config" class="config d-none">
         <h5>Configuracion</h5>
+        <button class="close" onclick="toggleMenu()">&times;</button>
         <form id="formConf" action="#" target="_self">
             <p>Fondo: </p>
             <div>
@@ -141,7 +145,9 @@
             </div>
             <div class="buttons">
                 <button type="button" id="btnSave" class="btn btn-saber">Guardar💾</button>
-                <button type="button" id="btnDel" class="btn btn-delete">Cancelar❌</button>
+                <button type="button" id="btnDel" class="btn btn-delete" onclick="toggleMenu()">Cancelar❌</button>
+                <!-- <button type="close" id="btnClose" class="btn btn-close" onclick="hiddenModal()">Cerrar✖</button> -->
+
             </div>
         </form>
     </nav>

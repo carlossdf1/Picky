@@ -16,7 +16,7 @@ function printFav(fav) {
             if (emoji != null) {
                 img = `data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text x=%22.0em%22 y=%221.0em%22 font-size=%2280%22>${img}</text></svg>`;
             }
-            let button = `<div><button id="${i}" class="btn-fav" onmouseover="clickFav(${i})" style="background-color: ${color}; color: ${fontColor}" >${name}<img src="${img}" class="icon" id="${i}" onmouseover="clickFav(${i})" alt="${name}"></button><div class="edit-btn" onclick="clickEditFav(${i})">⚙</div></div>`;
+            let button = `<div class="button-fav" ><button id="${i}" class="btn-fav" onmouseover="clickFav(${i})" style="background-color: ${color}; color: ${fontColor}" >${name}<img src="${img}" class="icon" id="${i}" onmouseover="clickFav(${i})" alt="${name}"></button><div class="edit-btn" onclick="clickEditFav(${i})">⚙</div></div>`;
             getId("listaFav").innerHTML += button;
         }
         getId("listaFav").innerHTML += impTemp("temp-btnAddFavForm", "btnAddForm").outerHTML;
@@ -158,6 +158,7 @@ function clickOnFav(e) {
 }
 
 function clickAddFav(form) {
+    getId("modal-title").innerHTML = "Agregar favorito";
     getId("modalFav").classList.remove("d-none");
     getId("btnsEdit").classList.add("d-none");
     getId("btnAdd").classList.remove("d-none");
@@ -165,6 +166,7 @@ function clickAddFav(form) {
 }
 
 function clickEditFav(id) {
+    getId("modal-title").innerHTML = "Editar favorito";
     let favoritos = getStore("favoritos");
     let f = favoritos[id];
     console.log(f);
@@ -183,6 +185,6 @@ function clickEditFav(id) {
 
 }
 
-function toggleMenu() {
-    getId("config").classList.toggle("d-none");
+function toggleMenu(id) {
+    getId(id).classList.toggle("d-none");
 }

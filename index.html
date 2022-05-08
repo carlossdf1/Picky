@@ -21,7 +21,7 @@
     </div>
 
     <nav class="nav-menu-icon">
-        <button onclick="toggleMenu()">
+        <button onclick="toggleMenu('config')">
             <div class="icon-menu"></div>
             <div class="icon-menu"></div>
             <div class="icon-menu"></div>
@@ -41,8 +41,9 @@
         </div>
 
         <div class="col-2">
+            <!-- <div> -->
             <div class="widget">
-                <div class="edit-widget" onclick="editWidget()">⚙</div>
+                <div class="edit-widget" onclick="toggleMenu('configIframe')">⚙</div>
                 <iframe src="https://archivos.meteochile.gob.cl/portaldmc/movil/movilpronoregion.php?reg=10a"
                     frameborder="0" scrolling="yes"></iframe>
             </div>
@@ -51,7 +52,7 @@
 
     <div id="modalFav" class="modal d-none">
         <div class="modal-content" onmouseout="closeFav()">
-            <h5 class="m-none">Editar</h5>
+            <h5 id="modal-title" class="m-none"></h5>
             <button class="close" onclick="hiddenModal()">&times;</button>
             <form id="formFav" action="#" target="_self">
                 <label for="nameFav">Nombre: </label>
@@ -99,7 +100,7 @@
 
     <nav id="config" class="config d-none">
         <h5>Configuracion</h5>
-        <button class="close" onclick="toggleMenu()">&times;</button>
+        <button class="close" onclick="toggleMenu('config')">&times;</button>
         <form id="formConf" action="#" target="_self">
             <p>Fondo: </p>
             <div>
@@ -148,6 +149,33 @@
                 <button type="button" id="btnDel" class="btn btn-delete" onclick="toggleMenu()">Cancelar❌</button>
                 <!-- <button type="close" id="btnClose" class="btn btn-close" onclick="hiddenModal()">Cerrar✖</button> -->
 
+            </div>
+        </form>
+    </nav>
+
+    <nav id="configIframe" class="config d-none" style="z-index: 3;">
+        <h5>Configuracion Iframe</h5>
+        <button class="close" onclick="toggleMenu('configIframe')">&times;</button>
+        <form id="formConf" action="#" target="_self">
+            <p>Fondo: </p>
+            <div>
+                <label for="urlFav">URL: </label>
+                <input type="url" class="inp" name="urlFav" id="url" placeholder="www.example.com" required>
+            </div>
+            <div>
+                <label for="onlyIcons">Solo iconos: </label>
+                <input type="range" id="onlyIcons" name="onlyIcons" class="switch" min="0" max="1" value="1"
+                    step="1"><br><br>
+            </div>
+            <div>
+                <label for="positionFav">Posición: </label>
+                <input type="number" class="inp" name="positionFav" id="position" placeholder="Ingrese una posición"
+                    min="0" value="">
+            </div>
+            <div class="buttons">
+                <button type="button" id="btnSave" class="btn btn-saber">Guardar💾</button>
+                <button type="button" id="btnDel" class="btn btn-delete" onclick="toggleMenu()">Cancelar❌</button>
+                <!-- <button type="close" id="btnClose" class="btn btn-close" onclick="hiddenModal()">Cerrar✖</button> -->
             </div>
         </form>
     </nav>

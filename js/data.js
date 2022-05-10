@@ -122,3 +122,30 @@ let favObject = [
         "category": ""
     }
 ];
+
+let widgetDefault = [
+    {
+        "id": "",
+        "name": "Meteoroligia",
+        "active": 1,
+        "url": "https://archivos.meteochile.gob.cl/portaldmc/movil/movilpronoregion.php?reg=10a",
+        "position": "",
+        "size": "",
+        "color": "",
+        "fontColor": "",
+        "category": "Clima"
+    }
+];
+
+let widgetObject = [
+    {
+        "name": "",
+        "active": "",
+        "url": "",
+        "position": "",
+        "size": "",
+        "color": "",
+        "fontColor": "",
+        "category": ""
+    }
+];

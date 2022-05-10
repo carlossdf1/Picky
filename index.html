@@ -22,13 +22,16 @@
 
     <nav class="nav-menu-icon">
         <button onclick="toggleMenu('config')">
-            <div class="icon-menu"></div>
-            <div class="icon-menu"></div>
-            <div class="icon-menu"></div>
+            <div class="icon-hamburger"></div>
+            <div class="icon-hamburger"></div>
+            <div class="icon-hamburger"></div>
         </button>
     </nav>
 
     <main>
+        <div class="col-0 d-none">
+        </div>
+
         <div class="col-1">
             <h1>Picky🔎</h1>
             <form action="https://www.google.cl/search" target="_self">
@@ -40,10 +43,14 @@
             </div>
         </div>
 
-        <div class="col-2">
+        <div id="w1" class="col-2">
             <!-- <div> -->
             <div class="widget">
-                <div class="edit-widget" onclick="toggleMenu('configIframe')">⚙</div>
+                <div class="edit-widget" onclick="toggleMenu('configIframe')">
+                    <div class="icon-menu"></div>
+                    <div class="icon-menu"></div>
+                    <div class="icon-menu"></div>
+                </div>
                 <iframe src="https://archivos.meteochile.gob.cl/portaldmc/movil/movilpronoregion.php?reg=10a"
                     frameborder="0" scrolling="yes"></iframe>
             </div>
@@ -146,7 +153,8 @@
             </div>
             <div class="buttons">
                 <button type="button" id="btnSave" class="btn btn-saber">Guardar💾</button>
-                <button type="button" id="btnDel" class="btn btn-delete" onclick="toggleMenu()">Cancelar❌</button>
+                <button type="button" id="btnDel" class="btn btn-delete"
+                    onclick="toggleMenu('config')">Cancelar❌</button>
                 <!-- <button type="close" id="btnClose" class="btn btn-close" onclick="hiddenModal()">Cerrar✖</button> -->
 
             </div>
@@ -156,25 +164,25 @@
     <nav id="configIframe" class="config d-none" style="z-index: 3;">
         <h5>Configuracion Iframe</h5>
         <button class="close" onclick="toggleMenu('configIframe')">&times;</button>
-        <form id="formConf" action="#" target="_self">
-            <p>Fondo: </p>
+        <form id="formWidget" action="#" target="_self">
             <div>
-                <label for="urlFav">URL: </label>
-                <input type="url" class="inp" name="urlFav" id="url" placeholder="www.example.com" required>
+                <label for="actIfr">Activar Iframe: </label>
+                <input type="range" id="actIfr" name="actIfr" class="switch" min="0" max="1" value="1" step="1"
+                    oninput="toggleMenu('w1')"><br><br>
             </div>
             <div>
-                <label for="onlyIcons">Solo iconos: </label>
-                <input type="range" id="onlyIcons" name="onlyIcons" class="switch" min="0" max="1" value="1"
-                    step="1"><br><br>
+                <label for="urlIfr">URL: </label>
+                <input type="url" class="inp" name="urlIfr" id="urlIfr" placeholder="www.example.com" required>
             </div>
             <div>
-                <label for="positionFav">Posición: </label>
-                <input type="number" class="inp" name="positionFav" id="position" placeholder="Ingrese una posición"
+                <label for="positionWid">Posición: </label>
+                <input type="number" class="inp" name="positionWid" id="position" placeholder="Ingrese una posición"
                     min="0" value="">
             </div>
             <div class="buttons">
                 <button type="button" id="btnSave" class="btn btn-saber">Guardar💾</button>
-                <button type="button" id="btnDel" class="btn btn-delete" onclick="toggleMenu()">Cancelar❌</button>
+                <button type="button" id="btnDel" class="btn btn-delete"
+                    onclick="toggleMenu('configIframe')">Cancelar❌</button>
                 <!-- <button type="close" id="btnClose" class="btn btn-close" onclick="hiddenModal()">Cerrar✖</button> -->
             </div>
         </form>
